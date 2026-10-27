@@ -1,23 +1,28 @@
-node('target-server') {
+pipeline {
+    agent { label 'my-node-01' }   // yahan apne agent ka naam ya label likho
 
-    def webRoot = '/var/www/html'
-
-    try {
+    stages {
         stage('Check Agent') {
-            sh 'hostname && whoami'
+            steps {
+                sh 'hostname && whoami'
+            }
         }
 
         stage('Checkout Code') {
-            checkout scm
+            steps {
+                checkout scm
+            }
         }
 
         stage('Install & Start Nginx') {
-            sh '''
-              sudo apt update -y
-              sudo apt install -y nginx
-              sudo systemctl start nginx
-              sudo systemctl enable nginx
-            '''
+            steps {
+                sh '''
+                  sudo apt update -y
+                  sudo apt install -y nginx
+                  sudo systemctl start nginx
+                  sudo systemctl enable nginx
+                '''
+            }
         }
-
     }
+}
