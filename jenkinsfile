@@ -1,0 +1,23 @@
+node('target-server') {
+
+    def webRoot = '/var/www/html'
+
+    try {
+        stage('Check Agent') {
+            sh 'hostname && whoami'
+        }
+
+        stage('Checkout Code') {
+            checkout scm
+        }
+
+        stage('Install & Start Nginx') {
+            sh '''
+              sudo apt update -y
+              sudo apt install -y nginx
+              sudo systemctl start nginx
+              sudo systemctl enable nginx
+            '''
+        }
+
+    }
