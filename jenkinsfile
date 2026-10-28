@@ -26,7 +26,7 @@ pipeline {
         stage('copy index.html /var/www/html') {
              steps {
                 sh '''
-                  sudo cp /home/ec2-user/jenkins/workpspace/pipeline-project/index.html  /var/www/html
+                  sudo cp /home/ec2-user/jenkins/workspace/pipeline-project/index.html  /var/www/html
                 '''
              }
         }
