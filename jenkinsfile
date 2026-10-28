@@ -2,7 +2,7 @@ pipeline {
       agent {'my-node-01'}  // target server
       stages {
            step ('checkout code') {
-             sh 'checkout scm
+             sh 'checkout scm'
             }
        }
       stages('install &  start httpd') {
