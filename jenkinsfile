@@ -17,8 +17,7 @@ pipeline {
         stage('Install & Start Nginx') {
             steps {
                 sh '''
-                  sudo apt update -y
-                  sudo apt install -y nginx
+                  sudo yum install -y nginx
                   sudo systemctl start nginx
                   sudo systemctl enable nginx
                 '''
