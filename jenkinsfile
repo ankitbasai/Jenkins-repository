@@ -23,5 +23,12 @@ pipeline {
                 '''
             }
         }
+        stage('copy index.html /var/www/html') {
+             step {
+                sh '''
+                  sudo cp /home/ec2-user/jenkins/workpspace/pipeline-project/index.html  /var/www/html
+                '''
+             }
+        }
     }
 }
