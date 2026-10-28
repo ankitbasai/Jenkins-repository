@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'target-server' }   // yahan apne agent ka naam ya label likho
+    agent { label 'my-node-01' }   // yahan apne agent ka naam ya label likho
 
     stages {
         stage('Check Agent') {
