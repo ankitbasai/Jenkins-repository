@@ -1,0 +1,18 @@
+pipeline {
+      agent {'my-node-01'}  // target server
+      stages {
+           step ('checkout code') {
+             sh 'checkout scm
+            }
+       }
+      stages('install &  start httpd') {
+           step {
+             sh '''
+               sudo yum install httppd -y
+               sudo systemctl start httpd
+               sudo systemctl enable httpd
+              '''
+          }
+      } 
+  }
+}
