@@ -1,18 +1,28 @@
 pipeline {
-      agent {'my-node-01'}  // target server
-      stages {
-           step ('checkout code') {
-             sh 'checkout scm'
+    agent { label 'target-server' }   // yahan apne agent ka naam ya label likho
+
+    stages {
+        stage('Check Agent') {
+            steps {
+                sh 'hostname && whoami'
             }
-       }
-      stages('install &  start httpd') {
-           step {
-             sh '''
-               sudo yum install httppd -y
-               sudo systemctl start httpd
-               sudo systemctl enable httpd
-              '''
-           }
-        } 
+        }
+
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install & Start Nginx') {
+            steps {
+                sh '''
+                  sudo apt update -y
+                  sudo apt install -y nginx
+                  sudo systemctl start nginx
+                  sudo systemctl enable nginx
+                '''
+            }
+        }
     }
- 
+}
